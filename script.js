@@ -204,10 +204,19 @@ portfolioData.forEach((item) => {
     mediaElement = document.createElement("video");
     mediaElement.classList.add("portfolio-img");
     mediaElement.src = item.media;
-    mediaElement.controls = true;
+    mediaElement.controls = false;
     mediaElement.muted = true;
     mediaElement.loop = true;
     mediaElement.autoplay = true;
+
+    // Block programmatic fullscreen
+  mediaElement.requestFullscreen = () => {};
+  mediaElement.webkitRequestFullscreen = () => {};
+  mediaElement.mozRequestFullScreen = () => {};
+  mediaElement.msRequestFullscreen = () => {};
+
+  // Block double-click fullscreen
+  mediaElement.addEventListener('dblclick', (e) => e.preventDefault());
   } else {
     mediaElement = document.createElement("img");
     mediaElement.classList.add("portfolio-img");
